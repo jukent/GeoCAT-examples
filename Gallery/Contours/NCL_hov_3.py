@@ -49,9 +49,8 @@ cf = ax.contourf(lon,
                  hatches=['....'])
 
 # Make all dot-filled areas light gray so contour lines are still visible
-for i, collection in enumerate(cf.collections):
-    collection.set_edgecolor('lightgray')
-    collection.set_linewidth(0.)
+cf.set_edgecolor('lightgray')
+cf.set_linewidth(0.)
 
 # Fill area at the lowest contour level, -6, with line hatching
 cf = ax.contourf(lon,
@@ -68,14 +67,7 @@ cs = ax.contour(lon,
                 levels=np.arange(-6, 12, 2),
                 colors='black',
                 linestyles="-",
-                linewidths=.2)
-
-# Set 0 level contour line to a thicker linewidth
-# If you try to access the "levels" attribute of cs (cs.levels),
-# the list of levels is: [-6, -4, -2, 0, 2, 4, 6, 8, 10]
-# level 0 is at the 3rd index of that list, so those contour lines
-# can be accessed at cs.collections[3]
-cs.collections[3].set_linewidth(1)
+                linewidths=[.2, .2, .2, 1, .2, .2, .2, .2, .2])
 
 # Label the contour levels -4, 0, and 4
 cl = ax.clabel(cs, fmt='%d', levels=[-4, 0, 4])
